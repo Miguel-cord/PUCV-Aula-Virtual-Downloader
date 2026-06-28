@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUCV Downloader</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 240px;
+      background: #1e1e2e;
+      color: #cdd6f4;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 13px;
+    }
+
+    .header {
+      background: #181825;
+      padding: 14px 16px;
+      border-bottom: 1px solid #313244;
+    }
+
+    .header h1 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #cba6f7;
+    }
+
+    .header p {
+      font-size: 11px;
+      color: #6c7086;
+      margin-top: 2px;
+    }
+
+    .body {
+      padding: 14px 16px;
+    }
+
+    #status-msg {
+      font-size: 12px;
+      color: #a6adc8;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    #status-msg .highlight {
+      color: #a6e3a1;
+      font-weight: 600;
+    }
+
+    #status-msg .dim {
+      color: #585b70;
+    }
+
+    .tip {
+      background: #313244;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 11px;
+      color: #6c7086;
+      line-height: 1.5;
+    }
+
+    .tip strong {
+      color: #a6adc8;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📥 PUCV Downloader</h1>
+    <p>Aula Virtual PUCV</p>
+  </div>
+
+  <div class="body">
+    <div id="status-msg">Cargando...</div>
+
+    <div class="tip">
+      <strong>¿Cómo usar?</strong><br>
+      Entra a un curso en el aula virtual. El panel aparece automáticamente cuando hay archivos disponibles.
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
