@@ -1,0 +1,1 @@
+Extensión de navegador (Chromium/Brave) para descargar archivos del Aula Virtual PUCV con un solo click.
