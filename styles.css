@@ -27,7 +27,18 @@
   border-bottom: 1px solid #313244;
   font-weight: 600;
   font-size: 13px;
-  cursor: default;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#pucv-dl-header:hover {
+  background: #1e1e2e;
+}
+
+#pucv-dl-chevron {
+  font-size: 10px;
+  color: #6c7086;
+  pointer-events: none;
 }
 
 #pucv-dl-header span {

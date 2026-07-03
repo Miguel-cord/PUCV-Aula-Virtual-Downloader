@@ -60,10 +60,10 @@ function injectPanel(files) {
   panel.id = 'pucv-dl-panel';
 
   panel.innerHTML = `
-    <div id="pucv-dl-header">
+    <div id="pucv-dl-header" title="Clic para plegar/desplegar">
       <span>📥 PUCV Downloader</span>
       <div id="pucv-dl-header-buttons">
-        <button id="pucv-dl-minimize" title="Minimizar">—</button>
+        <span id="pucv-dl-chevron">▲</span>
         <button id="pucv-dl-close" title="Cerrar">✕</button>
       </div>
     </div>
@@ -106,9 +106,12 @@ function attachPanelEvents(files, panel) {
   const checkboxes = () => panel.querySelectorAll('.pucv-dl-check');
   const statusEl   = panel.querySelector('#pucv-dl-status');
 
-  // Minimizar
-  panel.querySelector('#pucv-dl-minimize').addEventListener('click', () => {
-    body.classList.toggle('pucv-dl-hidden');
+  // Plegar/desplegar al hacer clic en el header
+  const chevron = panel.querySelector('#pucv-dl-chevron');
+  panel.querySelector('#pucv-dl-header').addEventListener('click', (e) => {
+    if (e.target.closest('#pucv-dl-close')) return;
+    const collapsed = body.classList.toggle('pucv-dl-hidden');
+    chevron.textContent = collapsed ? '▼' : '▲';
   });
 
   // Cerrar
