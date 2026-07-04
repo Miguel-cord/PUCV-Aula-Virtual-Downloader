@@ -42,7 +42,7 @@
 }
 
 #pucv-dl-header span {
-  color: #cba6f7; /* Lila suave — accent color */
+  color: #0059ff;
 }
 
 #pucv-dl-header-buttons {
@@ -100,8 +100,8 @@
 }
 
 #pucv-dl-download-btn {
-  background: #cba6f7;
-  color: #1e1e2e;
+  background: #40a02b;
+  color: #ffffff;
   border: none;
   border-radius: 6px;
   padding: 6px 12px;
@@ -112,7 +112,7 @@
 }
 
 #pucv-dl-download-btn:hover {
-  background: #d5b8ff;
+  background: #56b83f;
 }
 
 #pucv-dl-download-btn:active {
@@ -177,6 +177,42 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 12px;
+}
+
+/* Barra de progreso */
+#pucv-dl-progress {
+  margin-top: 10px;
+}
+
+#pucv-dl-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: #313244;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#pucv-dl-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #cba6f7;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+#pucv-dl-progress-label {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  color: #6c7086;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#pucv-dl-download-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Status */

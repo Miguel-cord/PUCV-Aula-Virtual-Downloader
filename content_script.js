@@ -91,6 +91,13 @@ function injectPanel(files) {
         `).join('')}
       </ul>
 
+      <div id="pucv-dl-progress" class="pucv-dl-hidden">
+        <div id="pucv-dl-progress-bar">
+          <div id="pucv-dl-progress-fill"></div>
+        </div>
+        <span id="pucv-dl-progress-label"></span>
+      </div>
+
       <div id="pucv-dl-status"></div>
     </div>
   `;
@@ -133,7 +140,12 @@ function attachPanelEvents(files, panel) {
   });
 
   // Botón descargar
-  panel.querySelector('#pucv-dl-download-btn').addEventListener('click', async () => {
+  const downloadBtn = panel.querySelector('#pucv-dl-download-btn');
+  const progressEl  = panel.querySelector('#pucv-dl-progress');
+  const progressFill = panel.querySelector('#pucv-dl-progress-fill');
+  const progressLabel = panel.querySelector('#pucv-dl-progress-label');
+
+  downloadBtn.addEventListener('click', async () => {
     const selected = [...checkboxes()]
       .filter(cb => cb.checked)
       .map(cb => files.find(f => f.id === parseInt(cb.dataset.id)));
@@ -143,22 +155,70 @@ function attachPanelEvents(files, panel) {
       return;
     }
 
-    showStatus(statusEl, `⏳ Descargando ${selected.length} archivo(s)...`, 'info');
-
-    // Pequeño delay entre descargas para no saturar el navegador
-    for (let i = 0; i < selected.length; i++) {
-      const file = selected[i];
-      chrome.runtime.sendMessage({
-        action: 'download',
-        url: file.url,
-        filename: file.name
-      });
-      if (i < selected.length - 1) {
-        await delay(600);
-      }
+    // Si es un solo archivo, descarga directo sin ZIP
+    if (selected.length === 1) {
+      chrome.runtime.sendMessage({ action: 'download', url: selected[0].url });
+      showStatus(statusEl, '✅ Descarga iniciada', 'success');
+      return;
     }
 
-    showStatus(statusEl, `✅ ${selected.length} descarga(s) iniciadas`, 'success');
+    // Múltiples archivos → empaquetar en ZIP
+    downloadBtn.disabled = true;
+    progressEl.classList.remove('pucv-dl-hidden');
+    statusEl.textContent = '';
+
+    const zip = new JSZip();
+    let completed = 0;
+    const errors = [];
+
+    for (const file of selected) {
+      progressLabel.textContent = `Empaquetando ${completed + 1} de ${selected.length}: ${file.name}`;
+      setProgress(progressFill, completed / selected.length);
+
+      try {
+        const response = await fetch(file.url, { credentials: 'include' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        // Obtener nombre real desde Content-Disposition si está disponible
+        const disposition = response.headers.get('Content-Disposition');
+        const realName = extractFilename(disposition) || sanitizeFilename(file.name);
+
+        const blob = await response.blob();
+        zip.file(realName, blob);
+      } catch (err) {
+        console.error(`[PUCV Downloader] Error en ${file.name}:`, err);
+        errors.push(file.name);
+      }
+
+      completed++;
+      setProgress(progressFill, completed / selected.length);
+    }
+
+    // Generar y descargar el ZIP
+    progressLabel.textContent = 'Generando ZIP...';
+    try {
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      const zipUrl = URL.createObjectURL(zipBlob);
+
+      // Usar <a> temporal para forzar el nombre del archivo
+      const a = document.createElement('a');
+      a.href = zipUrl;
+      a.download = 'archivos_pucv.zip';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(zipUrl), 5000);
+
+      const msg = errors.length > 0
+        ? `✅ ZIP listo (${completed - errors.length} archivos, ${errors.length} con error)`
+        : `✅ ZIP listo con ${completed} archivo(s)`;
+      showStatus(statusEl, msg, 'success');
+    } catch (err) {
+      showStatus(statusEl, '❌ Error al generar el ZIP', 'warn');
+    }
+
+    progressEl.classList.add('pucv-dl-hidden');
+    downloadBtn.disabled = false;
   });
 }
 
@@ -170,8 +230,22 @@ function showStatus(el, msg, type) {
   }
 }
 
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+function setProgress(fillEl, ratio) {
+  fillEl.style.width = `${Math.round(ratio * 100)}%`;
+}
+
+// Extraer nombre de archivo desde el header Content-Disposition
+function extractFilename(disposition) {
+  if (!disposition) return null;
+  const match = disposition.match(/filename\*=UTF-8''(.+)|filename="?([^"]+)"?/i);
+  if (!match) return null;
+  const raw = match[1] ? decodeURIComponent(match[1]) : match[2];
+  return raw ? sanitizeFilename(raw) : null;
+}
+
+// Eliminar caracteres inválidos para nombre de archivo
+function sanitizeFilename(name) {
+  return name.replace(/[/\\?%*:|"<>]/g, '-').trim();
 }
 
 // --- Inicializar ---
