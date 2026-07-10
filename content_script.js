@@ -63,12 +63,12 @@ function injectPanel(files) {
     <div id="pucv-dl-header" title="Clic para plegar/desplegar">
       <span>📥 PUCV Downloader</span>
       <div id="pucv-dl-header-buttons">
-        <span id="pucv-dl-chevron">▲</span>
+        <span id="pucv-dl-chevron">▼</span>
         <button id="pucv-dl-close" title="Cerrar">✕</button>
       </div>
     </div>
 
-    <div id="pucv-dl-body">
+    <div id="pucv-dl-body" class="pucv-dl-hidden">
       <div id="pucv-dl-controls">
         <label>
           <input type="checkbox" id="pucv-dl-select-all" checked>
