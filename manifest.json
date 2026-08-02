@@ -17,6 +17,12 @@
       "js": ["jszip.min.js", "content_script.js"],
       "css": ["styles.css"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://aulavirtual.pucv.cl/my/*", "https://aulavirtual.pucv.cl/my"],
+      "js": ["content_script_home.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
     }
   ],
   "action": {

@@ -93,7 +93,7 @@
 }
 
 #pucv-dl-controls input[type="checkbox"] {
-  accent-color: #0059ff;
+  accent-color: #cba6f7;
   width: 14px;
   height: 14px;
   cursor: pointer;
@@ -159,7 +159,7 @@
 }
 
 .pucv-dl-item input[type="checkbox"] {
-  accent-color: #0059ff;
+  accent-color: #cba6f7;
   width: 13px;
   height: 13px;
   flex-shrink: 0;
@@ -195,7 +195,7 @@
 #pucv-dl-progress-fill {
   height: 100%;
   width: 0%;
-  background: #0059ff;
+  background: #cba6f7;
   border-radius: 2px;
   transition: width 0.3s ease;
 }
@@ -238,4 +238,59 @@
 .pucv-dl-status-warn {
   background: #3d2e00;
   color: #f9e2af;
+}
+
+/* =====================
+   HOME — Ocultar cursos
+   ===================== */
+
+/* Tarjeta completamente oculta */
+.pucv-course-hidden {
+  display: none !important;
+}
+
+/* Tarjeta visible pero atenuada (modo "mostrar ocultos") */
+.pucv-course-dimmed {
+  opacity: 0.35;
+  filter: grayscale(60%);
+  transition: opacity 0.2s, filter 0.2s;
+  position: relative;
+}
+
+.pucv-course-dimmed:hover {
+  opacity: 0.6;
+  filter: grayscale(20%);
+}
+
+/* Botón toggle "Mostrar ocultos / Ocultar" */
+.pucv-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 6px 14px;
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border: 1px solid #313244;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.pucv-toggle-btn:hover {
+  background: #313244;
+  border-color: #45475a;
+}
+
+/* Separador antes de la opción de ocultar en el dropdown */
+.pucv-hide-btn {
+  color: #6c7086 !important;
+  font-size: 14px;
+}
+
+.pucv-hide-btn:hover {
+  color: #cdd6f4 !important;
+  background-color: #f8f9fa;
 }
