@@ -4,7 +4,7 @@
 // --- Configuración ---
 const MOODLE_BASE = 'https://aulavirtual.pucv.cl';
 
-// Íconos por tipo de archivo (emoji simples, sin dependencias)
+// Íconos por tipo de archivo
 const FILE_ICONS = {
   pdf:  '📄',
   docx: '📝', doc: '📝',
