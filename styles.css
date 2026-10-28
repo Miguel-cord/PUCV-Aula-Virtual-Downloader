@@ -1,18 +1,19 @@
-/* styles.css — Panel flotante de PUCV Downloader */
+/* styles.css — PUCV Downloader */
 
+/* ── Panel flotante ───────────────────────────────────────────── */
 #pucv-dl-panel {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 28px;
+  right: 28px;
   z-index: 99999;
-  width: 320px;
-  background: #1e1e2e;
-  border: 1px solid #313244;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  width: 300px;
+  background: #0f1523;        /* Azul marino oscuro */
+  border: 1px solid #1e2a45;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
   font-family: 'Segoe UI', system-ui, sans-serif;
   font-size: 13px;
-  color: #cdd6f4;
+  color: #dce3f0;
   overflow: hidden;
   user-select: none;
 }
@@ -22,172 +23,151 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 14px;
-  background: #181825;
-  border-bottom: 1px solid #313244;
-  font-weight: 600;
-  font-size: 13px;
+  padding: 11px 14px;
+  background: #0b1020;        /* Más oscuro que el panel */
+  border-bottom: 1px solid #1e2a45;
   cursor: pointer;
   transition: background 0.15s;
 }
 
-#pucv-dl-header:hover {
-  background: #1e1e2e;
+#pucv-dl-header:hover { background: #111827; }
+
+#pucv-dl-header-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #0059ff;
+  letter-spacing: 0.01em;
+}
+
+#pucv-dl-icon-logo { font-size: 14px; line-height: 1; }
+
+#pucv-dl-header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #pucv-dl-chevron {
   font-size: 10px;
-  color: #6c7086;
+  color: #4a5878;
   pointer-events: none;
 }
 
-#pucv-dl-header span {
-  color: #0059ff;
-}
-
-#pucv-dl-header-buttons {
-  display: flex;
-  gap: 6px;
-}
-
-#pucv-dl-header-buttons button {
+#pucv-dl-close {
   background: none;
   border: none;
-  color: #6c7086;
+  color: #4a5878;
   cursor: pointer;
   font-size: 13px;
-  padding: 0 4px;
-  line-height: 1;
+  padding: 2px 4px;
   border-radius: 4px;
+  line-height: 1;
   transition: color 0.15s;
 }
 
-#pucv-dl-header-buttons button:hover {
-  color: #cdd6f4;
-}
+#pucv-dl-close:hover { color: #e74c3c; }
 
 /* Body */
-#pucv-dl-body {
-  padding: 12px 14px;
-}
+#pucv-dl-body { padding: 12px 14px; }
+#pucv-dl-body.pucv-dl-hidden { display: none; }
 
-#pucv-dl-body.pucv-dl-hidden {
-  display: none;
-}
-
-/* Controles superiores */
+/* Controles */
 #pucv-dl-controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  gap: 8px;
 }
 
-#pucv-dl-controls label {
+#pucv-dl-select-label {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #a6adc8;
-  cursor: pointer;
   font-size: 12px;
+  color: #7a8baa;
+  cursor: pointer;
 }
 
-#pucv-dl-controls input[type="checkbox"] {
-  accent-color: #cba6f7;
-  width: 14px;
-  height: 14px;
+#pucv-dl-select-all {
+  accent-color: #00ff00;
+  width: 13px;
+  height: 13px;
   cursor: pointer;
 }
 
 #pucv-dl-download-btn {
-  background: #40a02b;
-  color: #ffffff;
+  background: #27ae60;
+  color: #fff;
   border: none;
-  border-radius: 6px;
-  padding: 6px 12px;
+  border-radius: 7px;
+  padding: 6px 13px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
   transition: background 0.15s, transform 0.1s;
+  letter-spacing: 0.01em;
 }
 
-#pucv-dl-download-btn:hover {
-  background: #56b83f;
-}
+#pucv-dl-download-btn:hover { background: #2ecc71; }
+#pucv-dl-download-btn:active { transform: scale(0.97); }
+#pucv-dl-download-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-#pucv-dl-download-btn:active {
-  transform: scale(0.97);
-}
-
-/* Lista de archivos */
+/* Lista */
 #pucv-dl-list {
   list-style: none;
   margin: 0;
   padding: 0;
-  max-height: 240px;
+  max-height: 230px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #313244 transparent;
+  scrollbar-color: #1e2a45 transparent;
 }
 
-#pucv-dl-list::-webkit-scrollbar {
-  width: 4px;
-}
+#pucv-dl-list::-webkit-scrollbar { width: 4px; }
+#pucv-dl-list::-webkit-scrollbar-thumb { background: #1e2a45; border-radius: 4px; }
 
-#pucv-dl-list::-webkit-scrollbar-thumb {
-  background: #313244;
-  border-radius: 4px;
-}
-
-.pucv-dl-item {
-  border-radius: 6px;
-  transition: background 0.1s;
-}
-
-.pucv-dl-item:hover {
-  background: #313244;
-}
+.pucv-dl-item { border-radius: 6px; transition: background 0.1s; }
+.pucv-dl-item:hover { background: #1c2840; } /* Gris carbón sobre azul marino */
 
 .pucv-dl-item label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
+  gap: 7px;
+  padding: 5px 7px;
   cursor: pointer;
   width: 100%;
   box-sizing: border-box;
 }
 
 .pucv-dl-item input[type="checkbox"] {
-  accent-color: #cba6f7;
+  accent-color: #0059ff;
   width: 13px;
   height: 13px;
   flex-shrink: 0;
-  cursor: pointer;
 }
 
-.pucv-dl-icon {
-  font-size: 14px;
-  flex-shrink: 0;
-}
+.pucv-dl-icon { font-size: 13px; flex-shrink: 0; }
 
 .pucv-dl-name {
-  color: #cdd6f4;
+  color: #dce3f0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 12px;
 }
 
-/* Barra de progreso */
-#pucv-dl-progress {
-  margin-top: 10px;
-}
+/* Progreso */
+#pucv-dl-progress { margin-top: 10px; }
 
 #pucv-dl-progress-bar {
   width: 100%;
-  height: 4px;
-  background: #313244;
+  height: 3px;
+  background: #1e2a45;
   border-radius: 2px;
   overflow: hidden;
 }
@@ -195,7 +175,7 @@
 #pucv-dl-progress-fill {
   height: 100%;
   width: 0%;
-  background: #cba6f7;
+  background: #27ae60;
   border-radius: 2px;
   transition: width 0.3s ease;
 }
@@ -204,93 +184,292 @@
   display: block;
   margin-top: 5px;
   font-size: 11px;
-  color: #6c7086;
+  color: #4a5878;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-#pucv-dl-download-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 /* Status */
 #pucv-dl-status {
-  margin-top: 10px;
+  margin-top: 8px;
   padding: 6px 8px;
   border-radius: 6px;
   font-size: 12px;
-  min-height: 28px;
-  transition: opacity 0.3s;
+  min-height: 26px;
 }
 
-.pucv-dl-status-info {
-  background: #1e3a5f;
-  color: #89dceb;
+.pucv-dl-status-info    { background: #0e1f3d; color: #5b9cf6; }
+.pucv-dl-status-success { background: #0d2318; color: #4ade80; }
+.pucv-dl-status-warn    { background: #2a1f08; color: #f9e2af; }
+
+/* ── Tema claro (cuando Moodle cambia a modo claro) ───────────── */
+#pucv-dl-panel.pucv-light-theme {
+  background: #f0f4ff;
+  border-color: #c8d3f0;
+  color: #1a1e3a;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.pucv-dl-status-success {
-  background: #1e3a2f;
-  color: #a6e3a1;
+#pucv-dl-panel.pucv-light-theme #pucv-dl-header {
+  background: #e0e8ff;
+  border-bottom-color: #c8d3f0;
 }
 
-.pucv-dl-status-warn {
-  background: #3d2e00;
-  color: #f9e2af;
+#pucv-dl-panel.pucv-light-theme #pucv-dl-header:hover {
+  background: #d4deff;
 }
 
-/* =====================
-   HOME — Ocultar cursos
-   ===================== */
-
-/* Tarjeta completamente oculta */
-.pucv-course-hidden {
-  display: none !important;
+#pucv-dl-panel.pucv-light-theme #pucv-dl-header-title {
+  color: #0040cc;
 }
 
-/* Tarjeta visible pero atenuada (modo "mostrar ocultos") */
+#pucv-dl-panel.pucv-light-theme #pucv-dl-chevron,
+#pucv-dl-panel.pucv-light-theme #pucv-dl-close {
+  color: #7080aa;
+}
+
+#pucv-dl-panel.pucv-light-theme #pucv-dl-select-label {
+  color: #4a5480;
+}
+
+#pucv-dl-panel.pucv-light-theme #pucv-dl-list {
+  scrollbar-color: #c8d3f0 transparent;
+}
+
+#pucv-dl-panel.pucv-light-theme #pucv-dl-list::-webkit-scrollbar-thumb {
+  background: #c8d3f0;
+}
+
+#pucv-dl-panel.pucv-light-theme .pucv-dl-item:hover {
+  background: #dce6ff;
+}
+
+#pucv-dl-panel.pucv-light-theme .pucv-dl-name {
+  color: #1a1e3a;
+}
+
+#pucv-dl-panel.pucv-light-theme #pucv-dl-progress-bar {
+  background: #c8d3f0;
+}
+
+#pucv-dl-panel.pucv-light-theme #pucv-dl-progress-label {
+  color: #4a5480;
+}
+
+#pucv-dl-panel.pucv-light-theme .pucv-dl-status-info    { background: #dce8ff; color: #0040cc; }
+#pucv-dl-panel.pucv-light-theme .pucv-dl-status-success { background: #d4f4e0; color: #1a7a40; }
+#pucv-dl-panel.pucv-light-theme .pucv-dl-status-warn    { background: #fff4d6; color: #8a6500; }
+
+
+/* ── Registro de tiempo — sección al fondo de la página ────────── */
+#pucv-time-section {
+  max-width: 860px;
+  margin: 32px auto 24px;
+  padding: 0 16px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.pucv-time-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dde1f0;
+}
+
+.pucv-time-header-icon { font-size: 15px; }
+
+.pucv-time-header-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2d3561;
+}
+
+.pucv-time-header-sub {
+  font-size: 11px;
+  color: #9aa0bb;
+}
+
+.pucv-time-list { display: flex; flex-direction: column; gap: 8px; }
+
+.pucv-time-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid #eaedf8;
+  border-radius: 10px;
+}
+
+.pucv-time-row-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pucv-time-row-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2d3561;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pucv-time-row-bar-wrap {
+  height: 4px;
+  background: #eaedf8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pucv-time-row-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #0059ff, #4d90ff);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  min-width: 4px;
+}
+
+.pucv-time-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.pucv-time-row-total {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0059ff;
+  min-width: 48px;
+}
+
+.pucv-time-row-sessions {
+  font-size: 11px;
+  color: #9aa0bb;
+}
+
+.pucv-time-row-last {
+  font-size: 11px;
+  color: #9aa0bb;
+  min-width: 44px;
+}
+
+/* ── Home — ocultar cursos ─────────────────────────────────────── */
+.pucv-course-hidden { display: none !important; }
+
 .pucv-course-dimmed {
   opacity: 0.35;
   filter: grayscale(60%);
   transition: opacity 0.2s, filter 0.2s;
-  position: relative;
 }
 
-.pucv-course-dimmed:hover {
-  opacity: 0.6;
-  filter: grayscale(20%);
-}
+.pucv-course-dimmed:hover { opacity: 0.6; filter: grayscale(20%); }
 
-/* Botón toggle "Mostrar ocultos / Ocultar" */
 .pucv-toggle-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   margin-bottom: 12px;
   padding: 6px 14px;
-  background: #1e1e2e;
-  color: #cdd6f4;
-  border: 1px solid #313244;
+  background: #fff;
+  color: #2d3561;
+  border: 1px solid #dde1f0;
   border-radius: 8px;
   font-size: 13px;
   font-family: 'Segoe UI', system-ui, sans-serif;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 
-.pucv-toggle-btn:hover {
-  background: #313244;
-  border-color: #45475a;
+.pucv-toggle-btn:hover { background: #f4f6fd; border-color: #b0bcdd; }
+
+.pucv-hide-btn { color: #8892b0 !important; }
+.pucv-hide-btn:hover { color: #2d3561 !important; background: #f4f6fd; }
+
+/* ── Quiz — check + exportar ──────────────────────────────────── */
+.pucv-quiz-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 10px;
+  vertical-align: middle;
+  position: relative;
+  z-index: 10;
 }
 
-/* Separador antes de la opción de ocultar en el dropdown */
-.pucv-hide-btn {
-  color: #6c7086 !important;
-  font-size: 14px;
+/* Botón check */
+.pucv-quiz-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #c8cfe8;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: border-color 0.15s, background 0.15s;
 }
 
-.pucv-hide-btn:hover {
-  color: #cdd6f4 !important;
-  background-color: #f8f9fa;
+.pucv-quiz-check svg {
+  width: 12px;
+  height: 12px;
+  display: none;
+}
+
+.pucv-quiz-check:hover {
+  border-color: #27ae60;
+}
+
+.pucv-quiz-check.pucv-quiz-done {
+  background: #27ae60;
+  border-color: #27ae60;
+}
+
+.pucv-quiz-check.pucv-quiz-done svg {
+  display: block;
+  stroke: #ffffff;
+}
+
+.pucv-quiz-check.pucv-quiz-done:hover {
+  background: #e74c3c;
+  border-color: #e74c3c;
+}
+
+/* Botón exportar */
+.pucv-quiz-export {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #c8cfe8;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0;
+  flex-shrink: 0;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.pucv-quiz-export:hover {
+  border-color: #0059ff;
+  background: #eaf0ff;
+}
+
+.pucv-quiz-export:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
