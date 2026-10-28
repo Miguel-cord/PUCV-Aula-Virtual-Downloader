@@ -2,11 +2,12 @@
   "manifest_version": 3,
   "name": "PUCV Aula Virtual Downloader",
   "version": "1.0.0",
-  "description": "Descarga archivos del Aula Virtual PUCV con un solo clic",
+  "description": "Descarga archivos y trackea cuestionarios del Aula Virtual PUCV",
   "permissions": [
     "downloads",
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "host_permissions": [
     "https://aulavirtual.pucv.cl/*"
@@ -22,6 +23,11 @@
       "matches": ["https://aulavirtual.pucv.cl/my/*", "https://aulavirtual.pucv.cl/my"],
       "js": ["content_script_home.js"],
       "css": ["styles.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://aulavirtual.pucv.cl/mod/quiz/view.php*"],
+      "js": ["content_script_quiz.js"],
       "run_at": "document_idle"
     }
   ],
